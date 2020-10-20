@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceOrderApiApplication<ServiceOrder-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.algaworks.serviceorderapi.ServiceOrderapi.ServiceOrderApiApplication",
+            "projectName": "ServiceOrder-api",
+            "args": ""
+        }
+    ]
+}

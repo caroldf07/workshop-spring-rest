@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.algaworks.serviceorderapi.ServiceOrderapi.Domain.Service.CadastroClienteService;
 import com.algaworks.serviceorderapi.ServiceOrderapi.domain.model.Client;
 import com.algaworks.serviceorderapi.ServiceOrderapi.domain.repository.ClientRepository;
 
@@ -29,6 +30,9 @@ public class ClientController{
 	@Autowired
 	private ClientRepository clientRepository;
 
+	@Autowired
+	private CadastroClienteService cadastroCliente;
+
 	//Configurando o GET
 	@GetMapping
 	public List<Client> listar(){
@@ -52,7 +56,7 @@ public class ClientController{
 	//Configurando o retorno do POST 201
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client postar(@Valid @RequestBody Client client){
-		return clientRepository.save(client);
+		return cadastroCliente.salvar(client);
 	}
 
 	//Configurando o PUT
@@ -65,7 +69,7 @@ public class ClientController{
 
 			//Para atualizar e não criar um novo
 			client.setId(clientId);
-			clientRepository.save(client);
+			cadastroCliente.salvar(client);
 			return ResponseEntity.ok(client);
 	}
 
@@ -75,7 +79,7 @@ public class ClientController{
 		if(!clientRepository.existsById(clientId)){
 			return ResponseEntity.notFound().build();
 		}
-		clientRepository.deleteById(clientId);
+		cadastroCliente.excluir(clientId);
 		//consta que foi deletado, mas não vai retornar nada no corpo
 		return ResponseEntity.noContent().build();
 	}
